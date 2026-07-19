@@ -5,31 +5,46 @@
 //  Created by RAKTIM MALAKAR on 19/07/26.
 //
 
-#include "vehicle/Vehicle.hpp"
-#include "vehicle/Bike.hpp"
-#include "vehicle/Car.hpp"
+#include <vector>
+#include <iostream>
 
+#include "Vehicle.hpp"
+#include "Bike.hpp"
+#include "Car.hpp"
+#include "../utils/RandomGenerator.hpp"
+
+class RandomGenerator;
 class VehicleMain {
     public:
-    static constexpr int VEHICLES = 1000;
+    static constexpr int VEHICLES = 10;
     void generateVehicles();
 };
 
 void VehicleMain::generateVehicles()
 {
-    std::vector <Vehicle*> vehicles(VEHICLES);
+    std::cout << "Creating VEHICLES..... " << std::endl;
+    std::vector <std::unique_ptr<Vehicle> > vehicles;
+    RandomGenerator* rand_gen = RandomGenerator::getInstance();
+    Vehicle* temp = nullptr;
     for(int i=0;i<VEHICLES;i++) {
         if(i&1) {
-            vehicles[i] = new Car(randomGenerator());
+            temp = new Car(RandomGenerator::VehicleNumberGenerator());
+            vehicles.push_back(std::unique_ptr<Vehicle>(temp));
         }
         else {
-            vehicles[i] = new Bike(randomGenerator());
+            temp = new Bike(RandomGenerator::VehicleNumberGenerator());
+            vehicles.push_back(std::unique_ptr<Vehicle>(temp));
         }
     }
-    delete[] vehicles;
+    std::cout << "VEHICLES created successfully..... " << std::endl;
+    for(const auto& elem : vehicles) {
+        elem->getVehicleDetails();
+    }
 }
 
 int main()
 {
+    VehicleMain obj;
+    obj.generateVehicles();
     return 0;
 }
