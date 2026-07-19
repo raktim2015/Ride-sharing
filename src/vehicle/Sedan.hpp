@@ -1,5 +1,5 @@
 //
-//  Bike.hpp
+//  Sedan.hpp
 //  
 //
 //  Created by RAKTIM MALAKAR on 19/07/26.
@@ -9,12 +9,12 @@
 #include <string>
 #include "Vehicle.hpp"
 
-class Bike : public Vehicle {
+class Sedan : public Vehicle {
     private:
-    static const int capacity = 1;
+    static const int capacity = 4;
     
     public:
-    explicit Bike(std::string vehicleNumber) : Vehicle(vehicleNumber) {}
+    explicit Sedan(std::string vehicleNumber) : Vehicle(vehicleNumber) {}
     void getVehicleDetails() const;
     int getCapacity() const;
 };

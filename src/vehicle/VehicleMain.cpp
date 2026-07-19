@@ -10,7 +10,8 @@
 
 #include "Vehicle.hpp"
 #include "Bike.hpp"
-#include "Car.hpp"
+#include "Suv.hpp"
+#include "Sedan.hpp"
 #include "../utils/RandomGenerator.hpp"
 
 class RandomGenerator;
@@ -28,11 +29,15 @@ void VehicleMain::generateVehicles()
     Vehicle* temp = nullptr;
     for(int i=0;i<VEHICLES;i++) {
         if(i&1) {
-            temp = new Car(RandomGenerator::VehicleNumberGenerator());
+            temp = new Sedan(RandomGenerator::VehicleNumberGenerator());
+            vehicles.push_back(std::unique_ptr<Vehicle>(temp));
+        }
+        else if(i&2) {
+            temp = new Bike(RandomGenerator::VehicleNumberGenerator());
             vehicles.push_back(std::unique_ptr<Vehicle>(temp));
         }
         else {
-            temp = new Bike(RandomGenerator::VehicleNumberGenerator());
+            temp = new Suv(RandomGenerator::VehicleNumberGenerator());
             vehicles.push_back(std::unique_ptr<Vehicle>(temp));
         }
     }

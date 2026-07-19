@@ -14,7 +14,7 @@ class Vehicle {
     
     public:
     virtual void getVehicleDetails() const = 0;
-    virtual int getPassengers() const = 0;
+    virtual int getCapacity() const = 0;
     Vehicle() = delete;
     virtual ~Vehicle() {}
     explicit Vehicle(std::string number) : vehicleNumber(number) {}
